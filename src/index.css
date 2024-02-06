@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(https://suchiar.com/wp-content/uploads/2022/02/Slide-1.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
