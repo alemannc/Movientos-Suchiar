@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import firestore from '../firebase';
+import { doc, setDoc } from "firebase/firestore"; 
 
 const Form = () => {
   const [alimento, setAlimento] = useState('');
@@ -10,9 +11,9 @@ const Form = () => {
 
     try {
       // Agregar documento a la colección "Carga de Porte"
-      await firestore.collection('CargaDePorte').add({
-        alimento,
-        cantidad,
+      await setDoc(doc(firestore, "Carta de porte", null), {
+        Alimento: alimento,
+        Cantidad: cantidad,
       });
 
       // Limpiar los campos después de enviar los datos
