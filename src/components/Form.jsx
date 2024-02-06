@@ -1,31 +1,36 @@
 import React, { useState } from 'react';
-import firestore from '../firebase';
-import { doc, setDoc } from "firebase/firestore"; 
+import  firestore  from '../firebase'; // Asegúrate de importar correctamente tu instancia de Firestore
+import { doc, setDoc } from 'firebase/firestore';
 
 const Form = () => {
   const [alimento, setAlimento] = useState('');
   const [cantidad, setCantidad] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
+    e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+  
     try {
-      // Agregar documento a la colección "Carga de Porte"
-      await setDoc(doc(firestore, "Carta de porte", null), {
+      // Obtener referencia al documento en la colección "Carta de porte"
+      const documentRef = doc(firestore, 'Carta de porte', '5634161670881280');
+      console.log(documentRef)
+      // Establecer los datos en el documento
+      const response = await setDoc(documentRef, {
         Alimento: alimento,
         Cantidad: cantidad,
       });
-
+      console.log(response, "RESPONSE")
       // Limpiar los campos después de enviar los datos
       setAlimento('');
       setCantidad('');
-
-      // Puedes mostrar un mensaje de éxito o realizar otras acciones aquí
+  
+      // Mostrar un mensaje de éxito en la consola
       console.log('Datos enviados con éxito a la tabla Carga de Porte');
     } catch (error) {
+      // Mostrar cualquier error en la consola
       console.error('Error al enviar los datos:', error);
     }
   };
+  
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-white border rounded shadow-md">
